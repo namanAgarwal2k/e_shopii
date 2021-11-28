@@ -30,7 +30,7 @@ class AuthScreen extends StatelessWidget {
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                stops: [0, 1],
+                stops: [0, 2],
               ),
             ),
           ),
@@ -53,7 +53,7 @@ class AuthScreen extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         color: Colors.pink.shade900,
-                        boxShadow: [
+                        boxShadow: const [
                           BoxShadow(
                             blurRadius: 8,
                             color: Colors.black26,
@@ -61,14 +61,14 @@ class AuthScreen extends StatelessWidget {
                           )
                         ],
                       ),
-                      child: Text(
+                      child: const Text(
                         'Shopii',
                         style: TextStyle(
                           color: Colors.white,
                           //  color: Theme.of(context).accentTextTheme.title.color,
                           fontSize: 50,
                           fontFamily: 'Anton',
-                          fontWeight: FontWeight.normal,
+                          fontWeight: FontWeight.w200,
                         ),
                       ),
                     ),
