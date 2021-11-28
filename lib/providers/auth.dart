@@ -2,6 +2,7 @@
 
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
@@ -74,7 +75,7 @@ class Auth with ChangeNotifier {
       });
       prefs.setString('userData', userData);
     } catch (error) {
-      throw error;
+      rethrow;
     }
   }
 
@@ -87,21 +88,25 @@ class Auth with ChangeNotifier {
   }
 
   Future<bool> tryAutoLogin() async {
+    log('chala nhi');
     final prefs = await SharedPreferences.getInstance();
     if (!prefs.containsKey('userData')) {
+      log('Bera garr');
       return false;
     }
+
     final extractedUserData =
         json.decode(prefs.getString('userData')) as Map<String, Object>;
     //String as data contains string type and objects for date and type.
     final expiryDate = DateTime.parse(extractedUserData['expiryDate']);
-
-    if (_expiryDate.isBefore(DateTime.now())) {
+    log(expiryDate.toString());
+    if (expiryDate.isBefore(DateTime.now())) {
       return false;
     }
     _token = extractedUserData['token'];
     _userId = extractedUserData['userId'];
     _expiryDate = expiryDate;
+
     notifyListeners();
     _autoLogout();
     return true;
